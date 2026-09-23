@@ -1,0 +1,103 @@
+{
+  "id": "sd-nothic-gaze",
+  "title": "Взгляд нотика",
+  "description": "<p>Короткое приключение для 3–4 персонажей 3 уровня. Герои исследуют башню мага, раскрывают тайну Ока За Гранью и решают судьбу Китона Арвела.</p>",
+  "version": "1.0.0",
+  "url": "https://github.com/sdsevendice/nothic-gaze",
+  "manifest": "https://raw.githubusercontent.com/sdsevendice/nothic-gaze/main/module.json",
+  "download": "https://github.com/sdsevendice/nothic-gaze/releases/download/v1.0.0/sd-nothic-gaze-1.0.0.zip",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14",
+    "maximum": "14"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.3.3",
+          "verified": "5.3.3",
+          "maximum": "5.3.3"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "ru-ru",
+        "type": "module",
+        "manifest": "https://github.com/phenomen/foundry-vtt-ru/releases/download/release-v14/module.json"
+      },
+      {
+        "id": "babele",
+        "type": "module",
+        "manifest": "https://gitlab.com/riccisi/foundryvtt-babele/-/jobs/artifacts/2.9.1/raw/module/module.json?job=build"
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+      }
+    ]
+  },
+  "authors": [
+    {
+      "name": "Seven Dice"
+    }
+  ],
+  "esmodules": [
+    "scripts/sd-nothic-gaze.mjs"
+  ],
+  "styles": [
+    {
+      "src": "styles/sd-nothic-gaze.css"
+    }
+  ],
+  "media": [
+    {
+      "type": "setup",
+      "url": "modules/sd-nothic-gaze/assets/nothic-gaze/ui/cover.webp",
+      "thumbnail": "modules/sd-nothic-gaze/assets/nothic-gaze/ui/cover.webp",
+      "loop": false
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Взгляд нотика",
+      "sorting": "m",
+      "color": "#8f352b",
+      "packs": [
+        "adventure"
+      ],
+      "folders": []
+    }
+  ],
+  "packs": [
+    {
+      "name": "adventure",
+      "label": "Приключение",
+      "banner": "modules/sd-nothic-gaze/assets/nothic-gaze/ui/cover.webp",
+      "path": "packs/adventure",
+      "type": "Adventure",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    }
+  ],
+  "quickstart": {
+    "adventures": {
+      "dnd5e": {
+        "uuid": "Compendium.sd-nothic-gaze.adventure.Adventure.NothicGazeAdv001"
+      }
+    },
+    "postImport": true,
+    "world": {
+      "background": "modules/sd-nothic-gaze/assets/nothic-gaze/ui/cover.webp",
+      "cover": "modules/sd-nothic-gaze/assets/nothic-gaze/ui/cover.webp",
+      "description": "<p>Короткое приключение для 3–4 персонажей 3 уровня.</p>"
+    }
+  }
+}

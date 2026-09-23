@@ -2,16 +2,43 @@ const NOTHIC_MODULE_ID = "sd-nothic-gaze";
 const NOTHIC_PACK_ID = "sd-nothic-gaze.adventure";
 const NOTHIC_ADVENTURE_ID = "NothicGazeAdv001";
 
+async function getNothicAdventure() {
+  const pack = game.packs.get(NOTHIC_PACK_ID);
+  return pack?.getDocument(NOTHIC_ADVENTURE_ID);
+}
+
 async function openNothicAdventureImporter() {
   if (!game.user.isGM) return;
-  const pack = game.packs.get(NOTHIC_PACK_ID);
-  const adventure = await pack?.getDocument(NOTHIC_ADVENTURE_ID);
+  const adventure = await getNothicAdventure();
   adventure?.sheet.render(true);
 }
 
 function nothicContentImported() {
   return game.journal.has("NTHJOURNALGM0001") && game.playlists.has("NTHMUSIC00000001");
 }
+
+async function openNothicStartPage() {
+  if (!game.user.isGM) return;
+  const start = game.scenes.get("WQI8kLWhiPoHY0W7");
+  if (start) await start.activate();
+  const journal = game.journal.get("NTHJOURNALGM0001");
+  journal?.sheet.render(true, {
+    pageId: "NTHPAGEGM0000002",
+    position: {
+      width: Math.min(1040, window.innerWidth - 80),
+      height: Math.min(820, window.innerHeight - 80)
+    }
+  });
+}
+
+Hooks.once("init", () => {
+  game.settings.register(NOTHIC_MODULE_ID, "startPageShown", {
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false
+  });
+});
 
 const SKILLS = {
   acr: ["Акробатика", "Удержаться на ногах в сложной ситуации или выполнить акробатический трюк."],
@@ -224,6 +251,10 @@ Hooks.once("ready", async () => {
     await openNothicAdventureImporter();
     return;
   }
+  if (game.user.isGM && !game.settings.get(NOTHIC_MODULE_ID, "startPageShown")) {
+    await game.settings.set(NOTHIC_MODULE_ID, "startPageShown", true);
+    await openNothicStartPage();
+  }
   if (game.system.id !== "dnd5e") return;
 
   for (const [key, [label]] of Object.entries(SKILLS)) {
@@ -262,8 +293,8 @@ Hooks.on("importAdventure", async adventure => {
   if (adventure.pack !== NOTHIC_PACK_ID) return;
   await new Promise(resolve => setTimeout(resolve, 250));
   createGmConsole();
-  const start = game.scenes.get("WQI8kLWhiPoHY0W7");
-  if (start && game.user.isGM) await start.activate();
-  const journal = game.journal.get("NTHJOURNALGM0001");
-  if (journal && game.user.isGM) journal.sheet.render(true, {pageId:"NTHPAGEGM0000002", position:{width:Math.min(1040, window.innerWidth-80), height:Math.min(820, window.innerHeight-80)}});
+  if (game.user.isGM) {
+    await game.settings.set(NOTHIC_MODULE_ID, "startPageShown", true);
+    await openNothicStartPage();
+  }
 });

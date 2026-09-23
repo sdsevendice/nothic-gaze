@@ -2,10 +2,10 @@
   "id": "sd-nothic-gaze",
   "title": "Взгляд нотика",
   "description": "<p>Короткое приключение для 3–4 персонажей 3 уровня. Герои исследуют башню мага, раскрывают тайну Ока За Гранью и решают судьбу Китона Арвела.</p>",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "url": "https://github.com/sdsevendice/nothic-gaze",
   "manifest": "https://raw.githubusercontent.com/sdsevendice/nothic-gaze/main/module.json",
-  "download": "https://github.com/sdsevendice/nothic-gaze/releases/download/v1.0.0/sd-nothic-gaze-1.0.0.zip",
+  "download": "https://github.com/sdsevendice/nothic-gaze/releases/download/v1.0.1/sd-nothic-gaze-1.0.1.zip",
   "compatibility": {
     "minimum": "14",
     "verified": "14",
